@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+    http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+	<!-- 本地调试 -->
+	<!-- <dubbo:reference id="wUserInfoByMongodbCommonRest" interface="com.run.shared.service.ucs.api.writer.user.UserBaseRestWriterService" 
+		url="dubbo:http://172.168.0.100:8888/user/register"/> -->
+	<dubbo:provider id="payload" payload="41943040"/>
+	<dubbo:consumer timeout="5000" />
+	<dubbo:reference id="registryService" interface="com.alibaba.dubbo.registry.RegistryService" check="false" />
+	<dubbo:reference id="registerReadService" interface="com.sefon.read.RegisterReadService" check="false" />
+	<dubbo:reference id="shadowReadService" interface="com.sefon.read.ShadowReadService" check="false" />
+	
+	<!-- cud -->
+	
+	<dubbo:reference interface="com.run.usc.api.base.crud.UserBaseCurdService" id="userBaseCurdService" check="false" timeout="10000" />
+	<dubbo:reference interface="com.run.authz.api.base.crud.UserRoleBaseCrudService" id="userRoleBaseCrudService" check="false" />
+	<dubbo:reference interface="com.run.gathering.center.api.crud.service.DeviceCrudService" id="deviceCrudService" check="false" />
+	<dubbo:reference interface="com.sefon.cud.PolicyCudService" id="policyCudService" check="false" />
+	<dubbo:reference interface="com.run.gathering.center.api.crud.service.er.DevicePeopleCrudService" id="devicePeopleCrudService" check="false" />
+	<dubbo:reference interface="com.sefon.cud.ShadowCudService" id="shadowCudService" check="false" />
+	<dubbo:reference interface="com.run.usc.api.base.crud.AccSourceBaseCrudService" id="accSourceBaseCrudService" check="false" />
+	<dubbo:reference interface="com.run.usc.api.base.crud.AccUserBaseCrudService" id="accUserBaseCrudService" check="false" />
+	<!-- 查询 -->
+
+	<dubbo:reference interface="com.run.authz.base.query.AuthzBaseQueryService" id="authzBaseQueryService" check="false" />
+	<dubbo:reference interface="com.run.usc.base.query.AccUserBaseQueryService" id="accUserQuery" check="false" timeout="10000"/>
+	<dubbo:reference interface="com.run.gathering.center.api.query.service.DeviceQueryService" id="deviceQueryService" check="false" retries="0" timeout="8000"/>
+
+	
+	<dubbo:reference interface="com.run.authz.base.query.FunctionItemBaseQueryService" id="functionItemBaseQueryService" check="false" />
+	<dubbo:reference interface="com.run.authz.base.query.PermiBaseQueryService" id="permiBaseQueryService" check="false" />
+	<dubbo:reference interface="com.run.authz.base.query.UserRoleBaseQueryService" id="userRoleBaseQueryService" check="false" />
+	<dubbo:reference interface="com.run.usc.base.query.UserBaseQueryService" id="userBaseQueryService" check="false" timeout="3000"/>
+	<dubbo:reference interface="com.run.usc.base.query.AccUserBaseQueryService" id="accUserBaseQueryService" check="false" />
+	<dubbo:reference interface="com.run.usc.base.query.AccSourceBaseQueryService" id="accSourceBaseQueryService" check="false" />
+
+	<dubbo:reference interface="com.sefon.cud.RegisterCudService" id="registerCudService" check="false"/>
+	<dubbo:reference interface="com.run.data.center.api.es.query.DeviceEsQueryService" id="deviceEsQueryService" check="false"/>
+	<dubbo:reference interface="com.run.gathering.center.api.query.service.AppTagQueryService" id="appTagQueryService" check="false"/>
+	<dubbo:reference interface="com.run.usc.api.base.crud.TenAccBaseCrudService" id="accCrudService" check="false"/>
+	
+	<dubbo:reference interface="com.run.usc.base.query.TenAccBaseQueryService" id="accService" check="false" />
+	
+</beans>
